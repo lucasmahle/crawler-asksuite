@@ -1,11 +1,11 @@
-import { Application, Request, Response, NextFunction } from "express";
-import QuotationController from "src/controllers/quotation.controller";
+import { Router } from 'express';
+import QuotationController from '../controllers/quotation.controller';
 
 
-const route = (app: Application) => {
+const QuotationRoute = (router: Router) => {
     const controller = QuotationController();
 
-    app.post("/buscar", (req: Request, res: Response, next: NextFunction) => controller.search(req, res, next));
+    router.post('/buscar', controller.search);
 }
 
-export default route;
+export default QuotationRoute;

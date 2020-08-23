@@ -1,13 +1,8 @@
-import express, { Request, Response } from "express";
+import express from 'express';
+import routesLoader from './routes';
 
 const app = express();
 
-app.get('/', (req: Request, res: Response) => {
-    res.send('Hello World from app.ts!')
-});
-
-app.post('/buscar', (req: Request, res: Response) => {
-    res.send('Hello World from app.ts!')
-});
+routesLoader(app);
 
 export default app;
