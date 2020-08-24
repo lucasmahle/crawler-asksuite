@@ -33,6 +33,8 @@ export class QuotationService {
                 'NRooms': '1',
                 'q': qValue,
                 'sid': sessionInputValue,
+                'ad': '1',
+                'ch': '0'
             },
             "headers": {
                 "cookie": "ASP.NET_SessionId=" + sessionId
