@@ -5,7 +5,6 @@ const IndexController = () => {
         res.json({
             success: true,
             data: {},
-            message: '',
             errors: []
         });
     }
