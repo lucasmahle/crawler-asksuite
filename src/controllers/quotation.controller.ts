@@ -42,23 +42,19 @@ const QuotationController = () => {
 
             const input = <SearchQuotationBody>req.body;
 
-            // Call service
             const quotationService = new QuotationService();
-            await quotationService.fetchDataLeCanton(input.checkin, input.checkout);
+            const quotation = await quotationService.fetchDataLeCanton(input.checkin, input.checkout);
 
-            // Save cache
-
-            // Return data
             res.json({
                 success: true,
-                data: input
+                data: quotation
             });
         } catch (error) {
             console.error(error);
             
             res.status(500).json({
                 success: false,
-                message: 'General error'
+                message: 'Something wrong happened'
             });
         }
     }
