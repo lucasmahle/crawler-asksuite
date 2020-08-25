@@ -30,7 +30,6 @@ const QuotationController = () => {
 
     const search = async (req: Request, res: Response) => {
         try {
-            //https://myreservations.omnibees.com/default.aspx?q=5462#/&diff=false&CheckIn=23092020&CheckOut=24092020&Code=&group_code=&loyality_card=&NRooms=1&ad=1&ch=0&ag=-
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
                 res.status(400).json({
@@ -45,7 +44,7 @@ const QuotationController = () => {
 
             // Call service
             const quotationService = new QuotationService();
-            await quotationService.fetchDataLeCanton();
+            await quotationService.fetchDataLeCanton(input.checkin, input.checkout);
 
             // Save cache
 

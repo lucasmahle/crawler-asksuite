@@ -11,8 +11,8 @@
     "strictNullChecks": true,
     "strictFunctionTypes": true,
     "alwaysStrict": true,
-    
-    "noUnusedLocals": true,
+
+    "noUnusedLocals": false,
     "noImplicitReturns": true,
     
     "moduleResolution": "node",
