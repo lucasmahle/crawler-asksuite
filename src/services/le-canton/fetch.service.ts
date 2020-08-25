@@ -2,6 +2,7 @@ import axios from 'axios';
 import { Moment } from 'moment';
 
 import { OMNIBEES_ENDPOINT, Q_VALUE } from '../../config/config';
+import { LeCantonCacheService } from './cache.service';
 
 export class LeCantonFetchService {
     private checkIn: Moment | undefined = undefined;
@@ -25,6 +26,13 @@ export class LeCantonFetchService {
     }
 
     async getLeCantonQuotationHTML(): Promise<string> {
+        const cacheKey = LeCantonCacheService.generateKey(this.checkIn, this.checkOut);
+
+        const cachedHtml = LeCantonCacheService.getHtml(cacheKey);
+        if(cachedHtml !== null){
+            return cachedHtml;
+        }
+
         const { sessionId, cookieSession } = await this.getCookieAndSessionId();
 
         const quotationResponse = await axios(this.getAjaxEndpoint(), {
@@ -43,6 +51,8 @@ export class LeCantonFetchService {
                 "cookie": "ASP.NET_SessionId=" + cookieSession
             },
         });
+
+        LeCantonCacheService.setHtml(cacheKey, quotationResponse.data);
 
         return quotationResponse.data;
     }
